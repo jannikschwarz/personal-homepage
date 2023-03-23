@@ -9,7 +9,7 @@
                     1.
                 </span>
                 My School years
-                <hr style="width: 25%;">
+                <hr class="underline">
             </h2> 
             <div class="text ml-2">
                 <p>
@@ -50,7 +50,7 @@
                     2.
                 </span>
                 Kamstrup Experience
-                <hr style="width: 25%;">
+                <hr class="underline">
             </h2>
             <div class="text ml-2">
                 <p>
@@ -94,7 +94,7 @@
                     3.
                 </span>
                 My skills
-                <hr style="width: 25%;">
+                <hr class="underline">
             </h2> 
             <div class="text ml-2">
                 <p>
@@ -182,11 +182,14 @@
 
     .text{
         color: whitesmoke;
-        max-width: 70%;
     }
     
     .index{
         color: #2196f3;
+    }
+    
+    .underline{
+        width: 80%;
     }
 
     .ml-2{
@@ -201,5 +204,13 @@
     hr{
         margin: 0.5rem 0;
         border: 1;
+    }
+
+    @media screen and (min-width: 1100px){
+        .text{
+            text-align: center;
+            align-items: center;
+            width: 80%;
+        }
     }
 </style>
