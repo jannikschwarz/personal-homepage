@@ -33,7 +33,7 @@
             <div class="side-item grid-item">
                 <div class="skills">
                     <h3 class="mb-2">Programming languages</h3>
-                    {#each programminglanguages as language}
+                    {#each programmingLanguages as language}
                     <p class="mb-1">{language.name}</p>
                         <div class="skill-bar-container mb-2">
                             <div class="skill-bar" style="width:{language.level}%"/>
@@ -114,101 +114,24 @@
     import WorkEducationComp from "../../components/workEducationComp.svelte";
     import HobbyComp from "../../components/hobbyComp.svelte";
     import { onMount } from "svelte";
+    import { getHobbies, getLanguages, getProgrammingLanguages, getTools, getWorkExperience, getEducations, initialize } from '../../lib/repository'
 
 
     let workExperiences = [];
     let educations = [];
     let hobbies = [];
-    let programminglanguages = [];
+    let programmingLanguages = [];
     let tools = [];
     let languages = [];
 
-    onMount(() => {
-        languages = [
-            {
-                name: "Danish",
-                written: 100,
-                spoken: 100,
-
-            },
-            {
-                name: "English",
-                written: 100,
-                spoken: 100,
-            },
-            {
-                name: "Swedish",
-                written: 30,
-                spoken: 50,
-            }
-        ]
-
-        programminglanguages = [
-            {
-                name: "C#",
-                level: 100
-            }
-        ]
-
-        tools = [
-            {
-                name: "Git",
-                level: 80
-            }
-        ]
-
-        workExperiences = [
-            {
-                title: "High-Software Intern at Kamstrup A/S",
-                startDate: "August 2021",
-                endDate: "January 2022",
-                text: "Required by the VIA Prof. Bachelore degree is 6 months of skill development as an intern with a company. I had the great pleasure to work with Kamstrup and get a deeper understanding working with .NET and web services",
-                keywords: [
-                    "High-level Software Engineering",
-                    "Usage of Software-Hardware setup",
-                    "DNS and Webservice Handling",
-                    "NUnit test Setup",
-                    "Setting up build projects with TeamCity"
-                ]
-            },
-            {
-                title: "Student Worker at Kamstrup A/S",
-                startDate: "January 2021",
-                endDate: "January 2023",
-                text: "Continue working with Kamstrup now as a Student worker, tasked to migrate the application to Gitlab and setup CI/CD",
-                keywords: [
-                    "Handling and working with Docker Virtual Machines",
-                    "Setup and running Git(lab) project",
-                    "Configuring Gitlab Runners for CI/CD",
-                    "Integration of Python in C#",
-                    "Deeper understanding in Visual Studio"
-                ]
-            }
-        ]
-
-        educations = [
-            {
-                title: "Prof. Bachelor in Software-Engineering, VIA Universitet",
-                startDate: "September 2019",
-                endDate: "January 2023",
-                text: "Education that focues on hand-on experience instead of board lectures, with a broad knowledge gathering and creativity",
-                keywords: [
-                    "Project manager in programming projects",
-                    "Understanding complex IT programs",
-                    "Knowledge in multiple programming languages",
-                    "Problem solving in innovative methods",
-                    "Multiple Database setups"
-                ]
-            }
-        ] 
-
-        hobbies = [
-            {
-                title: "Dungeons and Dragons",
-                text: "I spent quite a bit of my spare time playing the rollplaying game Dungeons and Dragons as the GameMaster or DungeonMaster. I love the creative freedom and building your own world",
-                date: "Started 2029"
-            }
-        ]
+    onMount(async () => {
+        initialize();
+        languages = await getLanguages();
+        programmingLanguages = await getProgrammingLanguages();
+        tools = await getTools();
+        workExperiences = await getWorkExperience();
+        educations = await getEducations();
+        hobbies = await getHobbies();
     })
 
 </script>
