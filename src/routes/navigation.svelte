@@ -41,4 +41,20 @@
         height: 100%;
         padding: 10px;
     }
+
+    @media screen and (max-width: 390px){
+        .navigation{
+            height: 8vh;
+        }
+
+        .navContent{
+            right: 5%;
+        }
+    }
+
+    @media screen and (max-width: 240px){
+        .navigation{
+            height: 12vh;
+        }
+    }
 </style>

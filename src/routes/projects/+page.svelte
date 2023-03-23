@@ -8,55 +8,6 @@
                 <span class="index">
                     1.
                 </span>
-                Unity Exams Project
-            </h1>
-            <div class="inner-project">
-                <div class="info">
-                    <h2>Project Info</h2>
-                    <hr>
-                    <p><strong>For the course XRD we created a full race came for VR with Unity</strong></p>
-                    <p>
-                        For the last semester I choose the XRD virtual reality course, in which we were tasked to create a full VR experience 
-                        that utilizes all core functionalities of the Oculus VR headset. Our team obted for a virtual race game that uses the 
-                        headset to give a front perspective of a racer. 
-                    </p>
-                </div>
-                {#if proj1}
-                <h2>Tools&Services</h2>
-                <hr>
-                <div class="tools-services grid-2">
-                    <div class="image-box">
-                        <img src="./tools-services/unity.png" class="icon" alt="unity"/>
-                    </div>
-                    <div class="image-box">
-                        <img src="./tools-services/oculus.png" class="icon" alt="node"/>
-                    </div>
-                    <p>Used <strong>Unity</strong> engine to create the VR game</p>
-                    <p>Used <strong>Oculus</strong> plugin to utilize its handcontrol and interaction system</p>
-                </div>
-                <h2>Links</h2>
-                <hr>
-                <div class="links">
-                    <p>Github:</p>
-                    <a style="color: #2196f3;" href="https://github.com/KristofLenard12/XR_project_X2">Repository of Unity XR_Project</a>
-                    <p>Youtube:</p>
-                    <a style="color: #2196f3;" href="https://youtu.be/RGK7vuxCuCQ">Youtube Presentation of XR_Project</a>
-                </div>
-                {/if}
-                <button class="collapsible-b" on:click={() => proj1 = !proj1}>
-                    {#if proj1}
-                        <Fa icon={faArrowCircleUp} size="1.8x"/>
-                    {:else}
-                        <Fa icon={faArrowCircleDown} size="1.8x"/>
-                    {/if}
-                </button>
-            </div>
-        </div>
-        <div>
-            <h1>
-                <span class="index">
-                    2.
-                </span>
                 DS & DK Bachelor Project
             </h1>
             <div class="inner-project">
@@ -72,8 +23,8 @@
                     <p>This Project expanded over <strong>Front-end</strong>, <strong>Middleware (RestAPI)</strong>, and <strong>Hardware</strong></p>
                 </div>
                 {#if proj2}
-                <h2>Tools&Services</h2>
                 <hr>
+                <h2>Tools&Services</h2>
                 <div class="tools-services">
                     <div class="image-box">
                         <img src="./tools-services/firebase.png" class="icon" alt="firebase"/>
@@ -88,8 +39,8 @@
                     <p>Used to build the Rest WebAPI connected to the drone</p>
                     <p>Used to create 3D animated models that represent the drone</p>
                 </div>
-                <h2>Links</h2>
                 <hr>
+                <h2>Links</h2>
                 <div class="links">
                     <p>Github API:</p>
                     <a style="color: #2196f3;" href="https://github.com/jannikschwarz/Drone-Stabilization_WebAPI">Drone-Stabilization-WebAPI</a>
@@ -113,23 +64,70 @@
                 <span class="index">
                     2.
                 </span>
-                DS & DK Bachelor Project
+                Unity Exams Project
             </h1>
             <div class="inner-project">
                 <div class="info">
                     <h2>Project Info</h2>
                     <hr>
-                    <p><strong>For the Bachelor Project, the team created a Drone Development Kit</strong></p>
-                    <p>The purpose of the Kit is to allow Drone developing Companies to use the test tool to ensure the developed 
-                        drones functions as expected. The Kit will give a visualization of the drone on its Homepage whilst the drone 
-                        itself is connected to a WebAPI that send the date to a cloud database. The Homepage then live updates the 
-                        3D model accordingly to the send data
+                    <p><strong>For the course XRD we created a full race came for VR with Unity</strong></p>
+                    <p>
+                        For the last semester I choose the XRD virtual reality course, in which we were tasked to create a full VR experience 
+                        that utilizes all core functionalities of the Oculus VR headset. Our team obted for a virtual race game that uses the 
+                        headset to give a front perspective of a racer. 
                     </p>
-                    <p>This Project expanded over <strong>Front-end</strong>, <strong>Middleware (RestAPI)</strong>, and <strong>Hardware</strong></p>
+                </div>
+                {#if proj1}
+                <hr>
+                <h2>Tools&Services</h2>
+                <div class="tools-services grid-2">
+                    <div class="image-box">
+                        <img src="./tools-services/unity.png" class="icon" alt="unity"/>
+                    </div>
+                    <div class="image-box">
+                        <img src="./tools-services/oculus.png" class="icon" alt="node"/>
+                    </div>
+                    <p>Used <strong>Unity</strong> engine to create the VR game</p>
+                    <p>Used <strong>Oculus</strong> plugin to utilize its handcontrol and interaction system</p>
+                </div>
+                <hr>
+                <h2>Links</h2>
+                <div class="links">
+                    <p>Github:</p>
+                    <a style="color: #2196f3;" href="https://github.com/KristofLenard12/XR_project_X2">Repository of Unity XR_Project</a>
+                    <p>Youtube:</p>
+                    <a style="color: #2196f3;" href="https://youtu.be/RGK7vuxCuCQ">Youtube Presentation of XR_Project</a>
+                </div>
+                {/if}
+                <button class="collapsible-b" on:click={() => proj1 = !proj1}>
+                    {#if proj1}
+                        <Fa icon={faArrowCircleUp} size="1.8x"/>
+                    {:else}
+                        <Fa icon={faArrowCircleDown} size="1.8x"/>
+                    {/if}
+                </button>
+            </div>
+        </div>
+        <div>
+            <h1>
+                <span class="index">
+                    2.
+                </span>
+                6th Semester Cloud Project
+            </h1>
+            <div class="inner-project">
+                <div class="info">
+                    <h2>Project Info</h2>
+                    <hr>
+                    <p><strong>In the 6th Semester we were tasked to build an Cloud based Webpage</strong></p>
+                    <p>The purpose of the project was to teach and understand the CI/CD setup whilst using a cloud service to hoste the webpage/API created. For this we created a 
+                        WebAPI using Node.js for a REST API hosted on Google Cloud, with a connected Frontpage where Sveltekit was used as the JS Framework.  
+                    </p>
+                    <p>This Project expanded over <strong>Front-end</strong> and <strong>WebAPI</strong></p>
                 </div>
                 {#if proj3}
-                <h2>Tools&Services</h2>
                 <hr>
+                <h2>Tools&Services</h2>
                 <div class="tools-services">
                     <div class="image-box">
                         <img src="./tools-services/firebase.png" class="icon" alt="firebase"/>
@@ -138,21 +136,19 @@
                         <img src="./tools-services/node.png" class="icon" alt="node"/>
                     </div>
                     <div class="image-box">
-                        <img src="./tools-services/Threejs.png" class="icon" alt="threejs"/>
+                        <img src="./tools-services/svelte-icon.png" class="icon" alt="threejs"/>
                     </div>
                     <p>Used for Cloud Databasing and Hosting the Frontend</p>
                     <p>Used to build the Rest WebAPI connected to the drone</p>
-                    <p>Used to create 3D animated models that represent the drone</p>
+                    <p>Used to create Front-end Page</p>
                 </div>
-                <h2>Links</h2>
                 <hr>
+                <h2>Links</h2>
                 <div class="links">
                     <p>Github API:</p>
-                    <a style="color: #2196f3;" href="https://github.com/jannikschwarz/Drone-Stabilization_WebAPI">Drone-Stabilization-WebAPI</a>
+                    <a style="color: #2196f3;" href="https://github.com/jhviggo/sep6-api">NodeJS RestAPI</a>
                     <p>Github Frontend:</p>
-                    <a style="color: #2196f3;" href="https://github.com/jannikschwarz/Drone-Stabilization-FrontEnd">Drone-Stabilization-Frontend</a>
-                    <p>Youtube:</p>
-                    <a style="color: #2196f3;" href="https://www.youtube.com/watch?v=TtA2yLlV1VE&ab_channel=Viggo">A short video of Product</a>
+                    <a style="color: #2196f3;" href="https://github.com/jhviggo/sep6-frontend">Svelte FrontEnd</a>
                 </div>
                 {/if}
                 <button class="collapsible-b" on:click={() => proj3 = !proj3}>
@@ -202,7 +198,6 @@
         text-align: center;
     }
 
-
     .inner-project{
         display: grid;
         grid-template-rows: auto;
@@ -214,7 +209,7 @@
         background-color: #2f353f;
         border-radius: 15px;
         box-shadow: 2px 2px 2px 2px #454e5aad;
-        min-height: 16rem;
+        min-height: 18rem;
         min-width: 25rem!important;
     }
 
@@ -223,11 +218,10 @@
         border: transparent;
         color: rgba(255, 255, 255, 0.349);
         font-size: 15px;
-        position: absolute;
+        position: relative;
         bottom: 0;
         left: 0;
         right: 0;
-        margin-bottom: 5px;
     }
 
     .collapsible-b:hover{
@@ -278,6 +272,13 @@
         background-color: black;
         border: 1;
         opacity: .1;
+    }
+
+    @media screen and (max-width: 1130px){
+        .content{
+            grid-template-rows: auto;
+            grid-template-columns: auto;
+        }
     }
 
 </style>

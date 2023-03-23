@@ -253,8 +253,6 @@
     .side-item{
         box-shadow: 2px;
         padding: 20px;
-        grid-column: 1 / span 1;
-        grid-row: inherit;
         max-width: 20rem;
     }
 
@@ -340,6 +338,58 @@
 
     h1{
         margin-left: 5px;
+    }
+
+    @media screen and (max-width: 1200px){
+        .nav :global(.navContent){
+            left: 5%
+        }
+
+        .container{
+            grid-template-rows: 6vh auto auto;
+        }
+
+        .content{
+            grid-template-columns: auto auto;
+            width: 90%;
+        }
+
+        .main-items{
+            width: 100%;
+        }
+
+        .side-items{
+            max-width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 980px){
+
+        .side-item{
+            padding: 10px;
+        }
+    }
+
+    @media screen and (max-width: 700px){
+        .content{
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+        }
+
+        .side-items{
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .side-item{
+            max-width: 100%;
+            padding: 20px;
+        }
+
+        .main-items{
+            min-width: 1rem;
+            max-width: 100%;
+        }
     }
 
 </style>
