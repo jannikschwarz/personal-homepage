@@ -280,12 +280,4 @@
         opacity: .1;
     }
 
-    .mt-1{
-        margin-top: 0.5rem!important;
-    }
-
-    .mb-2{
-        margin-bottom: 3rem!important;
-    }
-
 </style>
