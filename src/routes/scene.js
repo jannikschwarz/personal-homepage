@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+/**
+ */
 // Texture Loader
 const loader = new THREE.TextureLoader();
 const cross = loader.load('./cross.png');
@@ -33,9 +35,7 @@ const particlesGeometry = new THREE.BufferGeometry;
 const particlesCnt = 7000;
 const posArray = new Float32Array(particlesCnt * 3);
 for(let i = 0; i < particlesCnt * 3; i++){
-    //posArray[i] = Math.random();
-    //posArray[i] = Math.random() - 0.5;
-    posArray[i] = (Math.random() - 0.5) * (Math.random() * 5);
+    posArray[i] = (Math.random() - 0.6) * (Math.random() * 5);
 }
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray,3));
 
@@ -59,8 +59,9 @@ const particlesMaterial = new THREE.PointsMaterial({
 
 //Mesh
 const sphere = new THREE.Points(geometry, material);
+sphere.position.x = 0.8
 const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(sphere, particlesMesh);
+scene.add(particlesMesh);
 
 //Lights
 const pointLight = new THREE.PointLight(0xffffff, 0.1)

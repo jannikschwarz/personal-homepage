@@ -1,7 +1,7 @@
 <nav class="navigation">
     <div class="navContent">
         <div class="row">
-            <NavigationComp navText={"Home"} navLink={""} />
+            <NavigationComp navText={"Home"} navLink={"home"} />
             <NavigationComp navText={"My CV"} navLink={"cv"} />
             <NavigationComp navText={"Resume"} navLink={"resume"} />
             <NavigationComp navText={"Projects"} navLink={"projects"} />

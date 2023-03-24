@@ -111,7 +111,7 @@
         <div>
             <h1>
                 <span class="index">
-                    2.
+                    3.
                 </span>
                 6th Semester Cloud Project
             </h1>
