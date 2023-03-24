@@ -33,10 +33,8 @@ async function userLogin(password){
     try{
         const emails = await getEmails();
         let passChars = `${password.charAt(0)}${password.charAt(1)}`
-        console.log("Tried to log in : " + passChars);
         let emailToUse = emails.find(el => {
             let chars = `${el.charAt(0)}${el.charAt(el.indexOf("@") - 1)}`
-            console.log(chars);
             if(chars == passChars){
                 return el; 
             }
