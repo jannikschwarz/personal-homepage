@@ -213,4 +213,10 @@
             width: 80%;
         }
     }
+
+    @media screen and (max-width: 520px){
+        .content{
+            width: 90%;
+        }
+    }
 </style>

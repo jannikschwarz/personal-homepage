@@ -189,4 +189,16 @@
         opacity: .1;
     }
 
+    @media screen and (max-width: 650px){
+        .coreValues{
+            grid-template-columns: auto auto;
+        }
+    }
+
+    @media screen and (max-width: 520px){
+        .content{
+            width: 90%;
+        }
+    }
+
 </style>
