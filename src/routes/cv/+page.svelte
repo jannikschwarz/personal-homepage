@@ -132,7 +132,7 @@
         workExperiences = await getWorkExperience();
         educations = await getEducations();
         hobbies = await getHobbies();
-    })
+    });
 
 </script>
 <style>
@@ -183,7 +183,7 @@
         display: grid;
         grid-template-rows: auto;
         gap: 15px;
-    }    
+    } 
 
     .grid-item{
         background-color: #2f353f;

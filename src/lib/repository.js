@@ -92,10 +92,11 @@ async function getEducations(){
                 startDate: data.startDate,
                 endDate: data.endDate,
                 text: data.text,
-                keywords: data.keywords
+                keywords: data.keywords,
+                rank: data.rank
             }
             return education;
-        }); 
+        }).sort((a,b)=>a.rank-b.rank); 
     }catch(error){
         return undefined;
     }
@@ -134,7 +135,7 @@ async function getProgrammingLanguages(){
                 level: data.level
             }
             return programmingLanguage;
-        });
+        }).sort((a,b)=>b.level-a.level);;
     }catch(error){
         return undefined;
     }
@@ -153,7 +154,7 @@ async function getTools(){
                 level: data.level
             };
             return tool;
-        });
+        }).sort((a,b)=>b.level-a.level);
     }catch(error){
         return undefined;
     }
@@ -165,17 +166,19 @@ async function getWorkExperience(){
     }
     try{
         const snapshot = await getDocs(collection(db,'work-experience'));
-        return snapshot.docs.map(doc => {
+        let toRetrun = snapshot.docs.map(doc => {
             const data = doc.data();
             const experience = {
                 title: data.title,
                 startDate: data.startDate,
                 endDate: data.endDate,
                 text: data.text,
-                keywords: data.keywords
+                keywords: data.keywords,
+
             };
             return experience;
         });
+        return toRetrun.sort((a,b)=>b.rank-a.rank);
     }catch(error){
         return undefined;
     }
