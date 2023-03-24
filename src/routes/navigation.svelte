@@ -42,6 +42,12 @@
         padding: 10px;
     }
 
+    @media screen and (max-width: 520px){
+        .navContent{
+            left: 5%;
+        }
+    }
+
     @media screen and (max-width: 390px){
         .navigation{
             height: 8vh;

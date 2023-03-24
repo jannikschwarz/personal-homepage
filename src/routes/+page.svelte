@@ -1,6 +1,6 @@
 <div class="container">
-    <h1>Jannik S-W</h1>
-    <p>Welcome to my page, this side was created to give a personal introduction of who I am</p>
+    <h1 class="welcome-text" >Jannik S-W</h1>
+    <p class="welcome-text">Welcome to my page, this side was created to give a personal introduction of who I am</p>
     <div class="content">
         <div class="form">
             <div class="txt_field">
@@ -183,5 +183,17 @@
 
     .error {
         padding-top: 1rem;
+    }
+
+    @media screen and (max-width: 480px){
+        .welcome-text{
+            width: 20rem;
+        }
+    }
+
+    @media screen and (max-width: 400px){
+        .welcome-text{
+            width: 15rem;
+        }
     }
 </style>
