@@ -1,7 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore } from 'firebase/firestore'
+import { collection, getDocs, getFirestore, setDoc, addDoc} from 'firebase/firestore'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 let firebaseApp;
 let db; 
+let auth; 
+let date;
 
 const API_KEY = 'AIzaSyDNbj6O-ZihnVPGHq4siJ4Lb7Y8uW3nLd4';
 const MESSAGING_SENDER_ID = '386460790150';
@@ -22,6 +25,58 @@ function initialize(){
     };
     firebaseApp = initializeApp(firebaseConfig);
     db = getFirestore(firebaseApp);
+    auth = getAuth(firebaseApp);
+    date = new Date();
+}
+
+async function userLogin(password){
+    try{
+        const emails = await getEmails();
+        let passChars = `${password.charAt(0)}${password.charAt(1)}`
+        console.log("Tried to log in : " + passChars);
+        let emailToUse = emails.find(el => {
+            let chars = `${el.charAt(0)}${el.charAt(el.indexOf("@") - 1)}`
+            console.log(chars);
+            if(chars == passChars){
+                return el; 
+            }
+        })
+        const firebaseRep = await signInWithEmailAndPassword(auth, emailToUse, password);
+        const response = {
+            uid: firebaseRep.user.uid,
+            accessToken: firebaseRep.user.accessToken,
+            expirationTime: firebaseRep.user.stsTokenManager.expirationTime,
+            email: emailToUse, 
+            password: password
+        };
+        return response;
+    } catch (error) {
+        return undefined;
+    }
+}
+
+async function sendLoggin(emailToUse, password){
+    let logginData = {
+        email: emailToUse, 
+        password: password,
+        timestamp: `${date.toDateString()}`
+    }
+    await addDoc(collection(db,'loggins'),logginData);
+}
+
+async function getEmails(){
+    if(!db){
+        initialize();
+    }
+    try{
+        const snapshot = await getDocs(collection(db,'emails'));
+        return snapshot.docs.map(doc => {
+            const data = doc.data();
+            return data.email;
+        }); 
+    }catch(error){
+        return undefined;
+    }
 }
 
 async function getEducations(){
@@ -153,5 +208,7 @@ export {
     getProgrammingLanguages,
     getTools,
     getWorkExperience,
-    initialize
+    initialize,
+    userLogin,
+    sendLoggin
 }

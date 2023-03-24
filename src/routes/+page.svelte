@@ -1,192 +1,187 @@
 <div class="container">
-    <div class="nav">
-        <Navigation />
-    </div>
+    <h1>Jannik S-W</h1>
+    <p>Welcome to my page, this side was created to give a personal introduction of who I am</p>
     <div class="content">
-        <div class="front-text">
-            <h1>Jannik Schwarz-Wolf</h1>
-            <p class="text">A software-engineer with the drive to challenge himself and learn new technologies, 
-                whilst spending time fiddling around with small code projects and hobbies.</p>
-        </div>
-        <div class="mt-5">
-            <h2>
-                <span class="index">
-                    1.
-                </span>
-                Core Values
-            </h2>
-            <div class="coreValues">
-                <div class="inder-core">
-                    <div class="index-panel">
-                        <Fa icon={faTableList} size="4x" primaryColor="Grey"/>
-                        <h3>Keep it clean</h3>
-                    </div>
-                    <p class="text">Any service will have new additions and structuring the code to allow for this transition to be smooth is vital. Following code 
-                        principles and thinking ahead helps the process of future builds. Build understandable code and follow a flow of code structure</p>
-                </div>
-                <div class="inder-core">
-                    <div class="index-panel">
-                        <Fa icon={faLightbulb} size="4x" primaryColor="Yellow" secondaryColor="Blue" />
-                        <h3>Creativity</h3>
-                    </div>
-                    <p class="text">To enjoy ones work one must be creative and have fun! Colaborate with co-workers and spend time to find creative solutions, expand ones knowledge
-                        of aviable technologies and finally think broad.
-                    </p>
-                </div>
-                <div class="inder-core">
-                    <div class="index-panel">
-                        <Fa icon={faPeopleGroup} size="4x"/>
-                        <h3>Colaborate</h3>
-                    </div>
-                    <p class="text">A team is as strong as its weakest member, colaboration is key to find solutions and build a reliable service. Problems spend pondering alone
-                        on could have been solved quickly when discussed with ones team members.
-                    </p>
-                </div>
-                <div class="inder-core">
-                    <div class="index-panel">
-                        <Fa icon={faGears} size="4x"/>
-                        <h3>Deployment</h3>
-                    </div>
-                    <p class="text">Having a continues deployment with the aid of DevOps tools creates a secure and easy scalable enviroment, together with source control makes for
-                        a perfect coding experience. 
-                    </p>
-                </div>
+        <div class="form">
+            <div class="txt_field">
+                <input type="password" required bind:value={code}/>
+                <span></span>
+                <label>Login Code</label>
             </div>
-        </div>
-        <hr class="mb-5 mt-5">
-        <div>
-            <h2>
-                <span class="index">
-                    2.
-                </span>
-                Resume
-            </h2> 
-            <p class="text mt-1">
-                My name is Jannik, born and raised in Germany and then later relocated to Denmark. In Denmark I started my fascination with technology 
-                and later in my Gymnasium years I started my studies in the arts of Software development.
-            </p>
-            <p class="text mt-2">
-                Now in the year 2023 I have finished my Prof. Bachelore degree in Software-Engineering at VIA university in Horsens, with already good experience in the 
-                field from my student-work and internship. 
-            </p>
-            <ButtonCom link="/resume" text="Resume"/>
-        </div>
-        <hr class="mb-5 mt-5">
-        <div>
-            <h2>
-                <span class="index">
-                    3.
-                </span>
-                Projects
-            </h2>
-            <p class="text mt-1">
-                Throughout my studies and work experience I worked on multiple larger projects that expanded over Front-end, middleware, DevOps, Backend, Database, and even hardware. Do be 
-                noted that the current shown project are from my years at VIA university.
-            </p>
-            <ButtonCom link="/projects" text="Projects"/>
+            <button on:click={loginSubmit}>Login</button>
         </div>
     </div>
-    <footer>
-    </footer>
+    <p class="error">{errorMassage}</p>
 </div>
+<canvas bind:this={el} class="webgl"/>
+
 <script>
-    import Navigation from "./navigation.svelte";
-    import Fa from 'svelte-fa'
-    import { faTableList, faLightbulb, faPeopleGroup, faGears, faArrowRight } from '@fortawesome/free-solid-svg-icons'
-    import ButtonCom from "../components/buttonCom.svelte";
+    import { onMount } from 'svelte';
+    import { createScene } from './scene';
+    import { goto } from '$app/navigation';
+    import { userLogin, sendLoggin } from '../lib/repository'
+
+    /**
+     * @type {HTMLCanvasElement}
+     */
+    let el; 
+    /**
+     * @type {any}
+     */
+    let code;
+    let errorMassage = '';
+
+    onMount(() => {
+        createScene(el);
+        localStorage.setItem('login',"false");
+    });;
+
+    async function loginSubmit() {
+        if(!code){
+            errorMassage = 'Login Code missing';
+            return;
+        }
+        const response = await userLogin(code);
+        if(response == undefined){
+            errorMassage = 'failed to login'
+        }else{
+            errorMassage = '';
+            await sendLoggin(response.email, response.password);
+            localStorage.setItem('login',"true");
+            goto('/home');
+        }
+    }
 </script>
+
 <style>
     *{
         margin: 0;
         padding: 0;
         font-family: montserrat;
-        color: rgb(130, 174, 224);
+    }
+
+    .webgl{
+        position: fixed;
+        top: 0;
+        left: 0;
+        outline: none;
+    }
+
+    .container {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        place-content: center;
+        font-family: 'Poppins';
+        color: white;
     }
 
     .content {
-        display: grid;
-        margin-left: auto;
-        margin-right: auto;
-        width: 70%;
-    }
-
-    .container{
-        display: grid;
-        gap: 50px;
-        grid-template-rows: 6vh auto auto;
-        min-height: 100vh;
-        background-color: #1e2228;
-    }
-
-    .nav{
-        display: block;
+        display: flex;
+        gap: 5em;
         width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+        padding-top: 1em;
+        position: relative;
     }
 
-    .text{
-        color: rgba(255, 255, 255, 0.877);
-        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-        font-size: 1em;
-        margin: 0;
-        max-width: 70vh;
+    .content:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid white;
     }
 
-    .front-text{
-        display: grid;
-        grid-template-rows: 6vh auto;
-        gap: 1px;
+    h1 {
+        font-size: 4rem;
+        width: 50vw;
+        line-height: 97%;
+        text-align: left;
+        margin-bottom: 15px;
     }
 
-    .coreValues{
-        display: grid;
-        grid-template-columns: auto auto auto;
-        gap: 1px;
+    h1, p {
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+
+    p {
+        font-size: 1.3;
+        width: 40vw;
+    }
+
+    .form  .txt_field{
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 30px 0;
+    }
+
+    .txt_field input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+        color: white;
+    }
+
+    .txt_field label{
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: white;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+        transition: .5s;
+    }
+
+    .txt_field span::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: white;
+        transition: .5s;
+    }
+
+    .txt_field input:focus ~ label,
+    .txt_field input:valid ~ label{
+        top: -5px;
+        color: white;
+    }
+
+    .txt_field input:focus ~ span::before,
+    .txt_field input:valid ~ span::before{
+        width: 100%;
+    }
+
+    button{
+        width: 100%;
+        height: 50px;
+        border: 1px solid;
+        border-radius: 25px;
+        background: transparent;
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
         text-align: center;
-        font-size: 0.9em;
     }
 
-    .index{
-        color: #2196f3;
+    button:hover{
+        border-color: gray;
+        transition: .5s;
     }
 
-    .inder-core{
-        padding: 20px;
+    .error {
+        padding-top: 1rem;
     }
-    .mt-1{
-        margin-top: 0.5rem!important;
-    }
-
-    .mt-2{
-        margin-top: 1.5rem!important;
-    }
-
-    .mt-5{
-        margin-top: 3rem!important;
-    }
-
-    .mb-5{
-        margin-bottom: 3rem!important;
-    }
-
-    h3{
-        padding: 10px;
-        color: whitesmoke;
-        font-size: 1.5em;
-    }
-
-    h2{
-        color: whitesmoke;
-        font-size: 1.7em;
-    }
-
-    hr{
-        margin: 1rem 0;
-        color: black;
-        background-color: black;
-        border: 1;
-        opacity: .1;
-    }
-
 </style>
