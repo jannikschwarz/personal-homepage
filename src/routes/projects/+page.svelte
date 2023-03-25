@@ -283,7 +283,7 @@
 
     @media screen and (max-width: 540px){
         .content{
-            width: 87%;
+            width: 88%;
         }
     }
 
