@@ -45,6 +45,7 @@
     @media screen and (max-width: 520px){
         .navContent{
             left: 5%;
+            right: 5%;
         }
     }
 
