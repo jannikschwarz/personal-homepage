@@ -3,7 +3,7 @@
         <Navigation />
     </div>
     <div class="content">
-        <div>
+        <div class="project">
             <h1>
                 <span class="index">
                     1.
@@ -59,7 +59,7 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div class="project">
             <h1>
                 <span class="index">
                     2.
@@ -108,7 +108,7 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div class="project">
             <h1>
                 <span class="index">
                     3.
@@ -210,7 +210,7 @@
         border-radius: 15px;
         box-shadow: 2px 2px 2px 2px #454e5aad;
         min-height: 18rem;
-        min-width: 25rem!important;
+        min-width: 25rem;
     }
 
     .collapsible-b{
@@ -283,7 +283,10 @@
 
     @media screen and (max-width: 540px){
         .content{
-            width: 88%;
+            position: absolute;
+            width: 90%;
+            left: 2%;
+            top: 10%;
         }
     }
 
