@@ -7,6 +7,7 @@
             <div class="side-item grid-item">
                 <img class="profile svelte-fihri" src="./profile.jpg" alt="Profile picture"/>
                 <div class="contact">
+                    {#if !linkdinTrue}
                     <div class="p-3 center">
                         <Fa icon={faEnvelopeOpen} size="2.5x" primaryColor="rgb(0, 95, 204)"/>
                     </div>
@@ -14,6 +15,7 @@
                         <p><strong>Email</strong></p>
                         <p>jannikschwarz@live.dk</p>
                     </div>
+                    {/if}
                     <div class="p-3 center">
                         <Fa icon={faLocationPin} size="2.5x" primaryColor="rgb(0, 95, 204)"/>
                     </div>
@@ -123,8 +125,11 @@
     let programmingLanguages = [];
     let tools = [];
     let languages = [];
+    let linkdinTrue; 
 
     onMount(async () => {
+        linkdinTrue = false; 
+        if(localStorage.getItem('login') == "true") linkdinTrue = true; 
         initialize();
         languages = await getLanguages();
         programmingLanguages = await getProgrammingLanguages();
