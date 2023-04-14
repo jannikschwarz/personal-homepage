@@ -48,6 +48,7 @@
             errorMassage = '';
             await sendLoggin(response.email, response.password);
             localStorage.setItem('login',"true");
+            if(response.password == 'lnSoftwareEngineer') localStorage.setItem('linkdin',"true")
             goto('/home');
         }
     }
@@ -184,6 +185,7 @@
     .error {
         padding-top: 1rem;
     }
+    
 
     @media screen and (max-width: 480px){
         .welcome-text{
