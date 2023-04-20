@@ -20,7 +20,6 @@
     import { createScene } from './scene';
     import { goto } from '$app/navigation';
     import { userLogin, sendLoggin } from '../lib/repository'
-
     /**
      * @type {HTMLCanvasElement}
      */
@@ -48,7 +47,6 @@
             errorMassage = '';
             await sendLoggin(response.email, response.password);
             localStorage.setItem('login',"true");
-            if(response.password == 'lnSoftwareEngineer') localStorage.setItem('linkdin',"true")
             goto('/home');
         }
     }

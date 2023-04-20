@@ -1,10 +1,12 @@
 import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore, setDoc, addDoc, doc} from 'firebase/firestore'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, getDocs, getFirestore, setDoc, addDoc, doc, initializeFirestore} from 'firebase/firestore'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged  } from 'firebase/auth';
+import { logginEmails } from './logins';
 let firebaseApp;
 let db; 
 let auth; 
 let date;
+let expirationTime;
 
 const API_KEY = 'AIzaSyDNbj6O-ZihnVPGHq4siJ4Lb7Y8uW3nLd4';
 const MESSAGING_SENDER_ID = '386460790150';
@@ -24,14 +26,21 @@ function initialize(){
         databaseURL: `https://${projectId}.eur3.firebasedatabase.app`
     };
     firebaseApp = initializeApp(firebaseConfig);
-    db = getFirestore(firebaseApp);
+    db = initializeFirestore(firebaseApp, {
+        experimentalForceLongPolling: true,
+        useFetchStreams: false
+    });
     auth = getAuth(firebaseApp);
     date = new Date();
 }
 
 async function userLogin(password){
+    if(!db){
+        initialize();
+    }
+
     try{
-        const emails = await getEmails();
+        const emails = logginEmails;
         let passChars = `${password.charAt(0)}${password.charAt(1)}`
         let emailToUse = emails.find(el => {
             let chars = `${el.charAt(0)}${el.charAt(el.indexOf("@") - 1)}`
@@ -47,6 +56,7 @@ async function userLogin(password){
             email: emailToUse, 
             password: password
         };
+        expirationTime = response.expirationTime;
         return response;
     } catch (error) {
         return undefined;
@@ -62,25 +72,8 @@ async function sendLoggin(emailToUse, password){
     await setDoc(doc(db,'loggins/',logginData.email),logginData)
 }
 
-async function getEmails(){
-    if(!db){
-        initialize();
-    }
-    try{
-        const snapshot = await getDocs(collection(db,'emails'));
-        return snapshot.docs.map(doc => {
-            const data = doc.data();
-            return data.email;
-        }); 
-    }catch(error){
-        return undefined;
-    }
-}
-
 async function getEducations(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration();
     try{
         const snapshot = await getDocs(collection(db,'educations'));
         return snapshot.docs.map(doc => {
@@ -101,9 +94,7 @@ async function getEducations(){
 }
 
 async function getLanguages(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration()
     try{
         const snapshot = await getDocs(collection(db,'languages'));
         return snapshot.docs.map(doc => {
@@ -121,9 +112,7 @@ async function getLanguages(){
 }
 
 async function getProgrammingLanguages(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration()
     try{
         const snapshot = await getDocs(collection(db,'programming-languages'));
         return snapshot.docs.map(doc => {
@@ -140,9 +129,7 @@ async function getProgrammingLanguages(){
 }
 
 async function getTools(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration()
     try{
         const snapshot = await getDocs(collection(db,'tools'));
         return snapshot.docs.map(doc => {
@@ -159,9 +146,7 @@ async function getTools(){
 }
 
 async function getWorkExperience(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration()
     try{
         const snapshot = await getDocs(collection(db,'work-experience'));
         let toRetrun = snapshot.docs.map(doc => {
@@ -183,9 +168,7 @@ async function getWorkExperience(){
 }
 
 async function getHobbies(){
-    if(!db){
-        initialize();
-    }
+    checkExpiration()
     try{
         const snapshot = await getDocs(collection(db,'hobbies'));
         return snapshot.docs.map(doc => {
@@ -199,6 +182,13 @@ async function getHobbies(){
         });
     }catch(error){
         return undefined;
+    }
+}
+
+function checkExpiration(){
+    let current = date.getTime();
+    if(current >= expirationTime){
+        localStorage.setItem('login',"false");
     }
 }
 
