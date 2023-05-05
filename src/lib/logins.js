@@ -16,5 +16,6 @@ export let logginEmails = [
     "dstny@mail.com",
     "trimble@mail.com",
     "akkodis@mail.com",
-    "consid@mail.com"
+    "consid@mail.com",
+    "cgi@mail.com"
 ]
